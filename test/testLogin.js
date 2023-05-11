@@ -12,7 +12,7 @@ I would like to be able to login,
 so that I can see my profile
 */
 //.only() - only this test will run. No matter how many others we have
-describe.only('Login to Luma Demostore', () => {
+describe('Login to Luma Demostore', () => {
     context('I click on login and enter my credentials', () => {
         it('I should be logged in and see my profile', async () => {
             const driver = await new Builder().forBrowser('firefox').build();
