@@ -3,32 +3,50 @@ const {Builder, By, Key, until} = require('selenium-webdriver');
 const should = require('chai').should();
 
 /*
-   As a customer I want to find a product 
-   that Erin recommends
-*/
+   As a customer I want to find a a product 
+   that Erin recommends*/
+
 
 // Test grouping: Search
-describe.only('Go to shorts and find the items Erin recomends', () => {
+describe.only('Go to womens t-shirts and find the ones Erin recomends', () => {
     //Test case
-    context('I go to shorts, and filters to only show Erins recomendations', () => {
-        it('I see shorts recomended by Erin', async () => {
+    context('I go to women, chose t-shirtas and filter to only show Erins recomendations', () => {
+        it('I see all t-shirts recomended by Erin', async () => {
                 // Start web browser ---- Här bestämmer vi vilken browser som ska öppnas
-                const driver = await new Builder().forBrowser('firefox').build();   
-
-                // Search for a product ---- steg för att söka produkten
+                const driver = await new Builder().forBrowser('firefox').build();  
+               
                 try{
-                    //Move to magento site ---- Välj vilken hemsida som testas
+                    // Go to the store
                     await driver.get('https://magento.softwaretestingboard.com/')
+                
                     
-                    // Get the search input ----  
+                    // Go to womans items  
                     await driver.wait(until.elementLocated(By.id('ui-id-4')), 10000);
                     await driver.findElement(By.id('ui-id-4')).click();
+                    console.log('wrks1');
 
-                    await driver.wait(until.elementLocated(By.className('.item'[11])), 10000);
-                    await driver.findElement(By.className('.item'[11])).click();
+                    //select t-shirts
+                    await driver.wait(until.elementLocated(By.css('.more.icon')), 10000);
+                    await driver.findElement(By.css('.more.icon')).click();
+                    console.log('wrks2');
 
-                    
+                   // await driver.wait(until.elementLocated(By.css('a[href="http://magento.softwaretestingboard.com/women/bottoms-women/shorts-women.html"]')), 10000);
+                    //await driver.findElement(By.css('a[href="http://magento.softwaretestingboard.com/women/bottoms-women/shorts-women.html"]')).click();
 
+                   //go to recomended by Erin
+
+                   var nodeList = await driver.findElements(By.css(".filter-options-title"));
+
+                    for (var i = 0; i < nodeList.length; i++) {
+                     if (i === [6]) {
+                     await nodeList[i].click();
+                     break;
+                        }
+                    }
+                console.log('wrks3');
+
+
+                
                  
                 }catch(error) {
                     console.log(error);
